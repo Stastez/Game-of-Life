@@ -45,7 +45,7 @@ public class Grid {
      * Cells that are alive will be denoted "✓" and cells that are dead will be shown as "🞩".
      */
     public void printGrid(){
-        System.out.println("Iteration " + iteration + ": ");
+        System.out.println("Iteration " + iteration++ + ": ");
         for(int i = 0; i <= width; i++){
             System.out.print("-\t");
         }
