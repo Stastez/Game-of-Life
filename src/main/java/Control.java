@@ -1,14 +1,20 @@
 import java.io.*;
 
 public class Control {
-    Grid g = new Grid(30,40);
+    Grid g = new Grid(20,16);
 
     public void start(int iterations, int sleepTime, String source){
-        try {
+        /*try {
             createGridFromFile(source);
         }catch(Exception e){
             System.out.println("Fault.");
-        }
+        }*/
+
+        g.revive(3,1);
+        g.revive(4,2);
+        g.revive(2,3);
+        g.revive(3,3);
+        g.revive(4,3);
 
         for(int i = 0; i < iterations; i++){
             g.printGrid(sleepTime);
