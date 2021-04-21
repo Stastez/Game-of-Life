@@ -7,7 +7,7 @@ public class Grid {
         }
     }
 
-    private Cell[][] grid;
+    protected Cell[][] grid;
     private final int width;
     private final int height;
     private int iteration;
@@ -71,6 +71,9 @@ public class Grid {
         }
     }
 
+    /**
+     * Evolves the grid according to the given ruleset.
+     */
     public void evolveGrid(){
         Grid temp = new Grid(width, height);
 
@@ -83,8 +86,19 @@ public class Grid {
                 }
             }
         }
+
+        grid = temp.grid;
     }
 
+    /**
+     * Counts the amount of alive neighbours of the given cell. Neighbours: +++
+     *                                                                      +x+
+     *                                                                      +++
+     * @param x Denotes the x-coordinate of the cell to be counted. Must not be negative and must be less than the width of the grid.
+     * @param y Denotes the y-coordinate of the cell to be counted. Must not be negative and must be less than the height of the grid.
+     * @return The calculated amount of alive neighbours.
+     * @throws IllegalArgumentException When the given arguments don't match the given description.
+     */
     int countAliveNeighbours(int x, int y) throws IllegalArgumentException{
         if(x >= width | y >= height | x < 0 | y < 0){
             throw new IllegalArgumentException("Cannot access position (" + x + "," + y + ") on a grid of dimensions (" + (width - 1) + "," + (height - 1) + ").");
