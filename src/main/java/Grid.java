@@ -36,7 +36,7 @@ public class Grid {
             grid[i] = new Cell[height];
 
             for(int j = 0; j < height; j++){
-                grid[i][j] = new Cell(true);
+                grid[i][j] = new Cell(false);
             }
         }
     }
@@ -46,6 +46,8 @@ public class Grid {
      * Cells that are alive will be denoted "✓" and cells that are dead will be shown as "🞩".
      */
     public void printGrid(){
+        Control.clearScreen();
+
         System.out.println("Iteration " + iteration++ + ": ");  //Prints the iteration counter header.
         for(int i = 0; i <= width; i++){
             System.out.print("-\t");
@@ -64,11 +66,12 @@ public class Grid {
         for(int i = 0; i < height; i++){
             System.out.print(counterH++ + "\t");
             for(Cell[] tmp : grid){
-                System.out.print((tmp[i].isAlive ? "✓":"\uD83D\uDFA9")/*countAliveNeighbours(j++,i)*/ + "\t");
+                System.out.print((tmp[i].isAlive ? "✓":/*"\uD83D\uDFA9"*/" ")/*countAliveNeighbours(j++,i)*/ + "\t");
             }
             System.out.println();
             //j = 0;
         }
+        System.out.println();
     }
 
     /**
@@ -99,7 +102,7 @@ public class Grid {
      * @return The calculated amount of alive neighbours.
      * @throws IllegalArgumentException When the given arguments don't match the given description.
      */
-    int countAliveNeighbours(int x, int y) throws IllegalArgumentException{
+    private int countAliveNeighbours(int x, int y) throws IllegalArgumentException{
         if(x >= width | y >= height | x < 0 | y < 0){
             throw new IllegalArgumentException("Cannot access position (" + x + "," + y + ") on a grid of dimensions (" + (width - 1) + "," + (height - 1) + ").");
         }
@@ -170,15 +173,46 @@ public class Grid {
         return counter;
     }
 
-    public void kill(int x, int y){
+    /**
+     * Kills the specified cell.
+     * @param x x-coordinate of cell. Must not be negative and must be less than the width of the grid.
+     * @param y y-coordinate of cell. Must not be negative and must be less than the height of the grid.
+     * @throws IllegalArgumentException When the given arguments don't match the given description.
+     */
+    public void kill(int x, int y) throws IllegalArgumentException{
+        if(x >= width | y >= height | x < 0 | y < 0){
+            throw new IllegalArgumentException("Cannot access position (" + x + "," + y + ") on a grid of dimensions (" + (width - 1) + "," + (height - 1) + ").");
+        }
+
         grid[x][y].isAlive = false;
     }
 
-    public void revive(int x, int y){
+    /**
+     * Revives the specified cell.
+     * @param x x-coordinate of cell. Must not be negative and must be less than the width of the grid.
+     * @param y y-coordinate of cell. Must not be negative and must be less than the height of the grid.
+     * @throws IllegalArgumentException When the given arguments don't match the given description.
+     */
+    public void revive(int x, int y) throws IllegalArgumentException{
+        if(x >= width | y >= height | x < 0 | y < 0){
+            throw new IllegalArgumentException("Cannot access position (" + x + "," + y + ") on a grid of dimensions (" + (width - 1) + "," + (height - 1) + ").");
+        }
+
         grid[x][y].isAlive = true;
     }
 
-    public void setStatus(int x, int y, boolean status){
+    /**
+     * Sets the status of the specified cell to the given status.
+     * @param x x-coordinate of cell. Must not be negative and must be less than the width of the grid.
+     * @param y y-coordinate of cell. Must not be negative and must be less than the height of the grid.
+     * @param status new status of the cell
+     * @throws IllegalArgumentException When the given arguments don't match the given description.
+     */
+    public void setStatus(int x, int y, boolean status) throws IllegalArgumentException{
+        if(x >= width | y >= height | x < 0 | y < 0){
+            throw new IllegalArgumentException("Cannot access position (" + x + "," + y + ") on a grid of dimensions (" + (width - 1) + "," + (height - 1) + ").");
+        }
+
         grid[x][y].isAlive = status;
     }
 }
