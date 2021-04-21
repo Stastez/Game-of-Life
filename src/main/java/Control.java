@@ -3,30 +3,30 @@ import java.io.*;
 public class Control {
     Grid g = new Grid(30,40);
 
-    public void start(){
+    public void start(int iterations, int sleepTime, String source){
         try {
-            createGridFromFile("C:\\Users\\Sandr\\OneDrive - Universität Potsdam\\Desktop\\factory.txt");
+            createGridFromFile(source);
         }catch(Exception e){
             System.out.println("Fault.");
         }
 
-        for(int i = 0; i < 100; i++){
-            g.printGrid();
+        for(int i = 0; i < iterations; i++){
+            g.printGrid(sleepTime);
             g.evolveGrid();
         }
-        g.printGrid();
+        g.printGrid(sleepTime);
     }
 
     /**
      * Tries to push the screen clear in order to be able to watch the evoltion.
      */
-    public static void clearScreen() {
+    public static void clearScreen(int sleepTime) {
         try {
-            Thread.sleep(125);
+            Thread.sleep(sleepTime);
         }catch (Exception e){
             System.out.println("Could not sleep.");
         }
-        System.out.print("\n".repeat(50));
+        System.out.print("\n".repeat(65));
 
         //System.out.println("\033[2J");
     }

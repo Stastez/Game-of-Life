@@ -45,8 +45,8 @@ public class Grid {
      * First prints an iteration counter of the grid, then the grid saved in the class variable while also displaying a row and column counter.
      * Cells that are alive will be denoted "✓" and cells that are dead will be shown as "🞩".
      */
-    public void printGrid(){
-        Control.clearScreen();
+    public void printGrid(int sleepTime){
+        Control.clearScreen(sleepTime);
 
         System.out.println("Iteration " + iteration++ + ": ");  //Prints the iteration counter header.
         for(int i = 0; i <= width; i++){
