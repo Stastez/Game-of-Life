@@ -10,11 +10,13 @@ public class Grid {
     Cell[][] grid;
     int width;
     int height;
+    int iteration;
 
     Grid(int width, int height){
         this.width = width;
         this.height = height;
         makeGrid(width, height);
+        iteration = 0;
     }
 
     /**
@@ -39,10 +41,16 @@ public class Grid {
     }
 
     /**
-     * Prints the grid saved in the class variable while also displaying a row and column counter.
+     * First prints an iteration counter of the grid, then the grid saved in the class variable while also displaying a row and column counter.
      * Cells that are alive will be denoted "✓" and cells that are dead will be shown as "🞩".
      */
     public void printGrid(){
+        System.out.println("Iteration " + iteration + ": ");
+        for(int i = 0; i <= width; i++){
+            System.out.print("-\t");
+        }
+        System.out.println();
+
         System.out.print("\t");                 //Sets up a counter, so that each row and column of
         for(int i = 0; i < width; i++){         //the resulting print show their respective number.
             System.out.print(i + 1 + "\t");
@@ -57,5 +65,9 @@ public class Grid {
             }
             System.out.println();
         }
+    }
+
+    public void evolveGrid(){
+
     }
 }
